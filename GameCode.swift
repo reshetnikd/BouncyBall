@@ -23,6 +23,15 @@ let funnelPoints = [
 
 let funnel = PolygonShape(points: funnelPoints)
 
+let targetPoints = [
+    Point(x: 10, y: 0),
+    Point(x: 0, y: 10),
+    Point(x: 10, y: 20),
+    Point(x: 20, y: 10)
+]
+
+let target = PolygonShape(points: targetPoints)
+
 /*
 The setup() function is called once when the app launches. Without it, your app won't compile.
 Use it to set up and start your app.
@@ -48,11 +57,20 @@ fileprivate func setupBarrier() {
     scene.add(barrier)
 }
 
-fileprivate func extractedFunc() {
+fileprivate func setupFunnel() {
     funnel.position = Point(x: 200, y: scene.height - 25)
     funnel.onTapped = dropBall
     funnel.fillColor = .gray
     scene.add(funnel)
+}
+
+fileprivate func setupTarget() {
+    target.position = Point(x: 200, y: 400)
+    target.hasPhysics = true
+    target.isImmobile = true
+    target.isImpermeable = true
+    target.fillColor = .yellow
+    scene.add(target)
 }
 
 func setup() {
@@ -62,7 +80,10 @@ func setup() {
     setupBarrier()
     
     // Add a funnel to the scene.
-    extractedFunc()
+    setupFunnel()
+    
+    // Add a target to the scene.
+    setupTarget()
 }
 
 // Drops the ball by moving it to the funnel's position.
