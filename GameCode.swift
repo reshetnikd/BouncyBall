@@ -1,6 +1,6 @@
 import Foundation
 
-let circle = OvalShape(width: 150, height: 150)
+let ball = OvalShape(width: 40, height: 40)
 
 let barrierWidth = 300.0
 let barrierHeight = 25.0
@@ -33,24 +33,39 @@ for example if statements and for loops, at the top level; they have to be writt
 of a function.
 */
 
-func setup() {
-    circle.position = Point(x: 250, y: 400)
-    circle.hasPhysics = true
-    scene.add(circle)
-    
-    // Add a barrier to the scene.
+fileprivate func setupBall() {
+    ball.position = Point(x: 250, y: 400)
+    ball.hasPhysics = true
+    ball.fillColor = .blue
+    scene.add(ball)
+}
+
+fileprivate func setupBarrier() {
     barrier.position = Point(x: 200, y: 150)
     barrier.hasPhysics = true
     barrier.isImmobile = true
+    barrier.fillColor = .brown
     scene.add(barrier)
-    
-    // Add a funnel to the scene.
+}
+
+fileprivate func extractedFunc() {
     funnel.position = Point(x: 200, y: scene.height - 25)
     funnel.onTapped = dropBall
+    funnel.fillColor = .gray
     scene.add(funnel)
+}
+
+func setup() {
+    setupBall()
+    
+    // Add a barrier to the scene.
+    setupBarrier()
+    
+    // Add a funnel to the scene.
+    extractedFunc()
 }
 
 // Drops the ball by moving it to the funnel's position.
 func dropBall() {
-    circle.position = funnel.position
+    ball.position = funnel.position
 }
