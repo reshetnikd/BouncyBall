@@ -118,6 +118,10 @@ func dropBall() {
     for barrier in barriers {
         barrier.isDraggable = false
     }
+    
+    for target in targets {
+        target.fillColor = .yellow
+    }
 }
 
 // Handles collisions between the ball and the targets.
@@ -131,6 +135,18 @@ func ballExitedScene() {
     for barrier in barriers {
         barrier.isDraggable = true
     }
+    
+    var hitTargets = 0
+    
+    for target in targets {
+        if target.fillColor == .green {
+            hitTargets += 1
+        }
+    }
+    
+    if hitTargets == targets.count {
+        scene.presentAlert(text: "You won!", completion: alertDismissed)
+    }
 }
 
 // Resets the game by moving the ball below the scene, which will unlock the barriers.
@@ -140,4 +156,8 @@ func resetGame() {
 
 func printPosition(of shape: Shape) {
     print(shape.position)
+}
+
+func alertDismissed() {
+    // An empty function.
 }
