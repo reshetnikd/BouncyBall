@@ -46,5 +46,11 @@ func setup() {
     
     // Add a funnel to the scene.
     funnel.position = Point(x: 200, y: scene.height - 25)
+    funnel.onTapped = dropBall
     scene.add(funnel)
+}
+
+// Drops the ball by moving it to the funnel's position.
+func dropBall() {
+    circle.position = funnel.position
 }
